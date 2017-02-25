@@ -1,6 +1,6 @@
 "use strict";
 
-var Visitor = require('../src/visitor');
+var Visitor = require('../../src/visitor');
 
 class FakeVisitor extends Visitor{
 	constructor(dateOfBirth){

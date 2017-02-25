@@ -20,7 +20,7 @@ class Visitor {
         return this.totalDrinkVolume;
     }
 
-    getHasBirthdayToday(){
+    hasBirthdayToday(){
         return this._bithday === Date.now() ? true : false;
     }
 

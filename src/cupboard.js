@@ -29,7 +29,7 @@ class Cupboard {
         //
 
         return volume;
-    }
+    };
 }
 
 module.exports = Cupboard;
