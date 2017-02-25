@@ -31,7 +31,7 @@ class CupboardStub {
 		this._isOpen = value;
 	}
 
-	set KeyIsLost(value) {
+	set keyIsLost(value) {
 		this._isKeyLost = value;
 	}
 }

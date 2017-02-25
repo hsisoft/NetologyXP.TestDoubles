@@ -18,6 +18,12 @@ class Barmen {
             throw new Error('Sorry. Not enough ' + drinkName);
         }
 
+		if ((!this._cupboard.isOpen())&&(this._cupboard.isKeyLost())) {
+			this._smsService.send('Cupboard is closed and the key is lost');
+//			throw new Error('Sorry. cupboard is closed and the key is lost');
+			console.error("Sorry. cupboard is closed and the key is lost");
+		}
+
         if (visitor.hasBirthdayToday()){
 			cashMachine.printCheck();
 			return 3 *

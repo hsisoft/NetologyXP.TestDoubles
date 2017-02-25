@@ -76,15 +76,17 @@ suite('When barmen pours drinks', function () {
 
 		setup(function () {
 			alwaysClosedAndLostCupboard = new CupboardStub();
-			alwaysFullCupboard.empty = false;
+			alwaysClosedAndLostCupboard.empty = false;
+			alwaysClosedAndLostCupboard.open = false;
+			alwaysClosedAndLostCupboard.keyIsLost = true;
 		});
 
-		test('SMS "cupboard is closed and the key is lost" is sent to boss', function () {
-		    barmen = new Barmen(alwaysFullCupboard, smsService);
+		test('SMS "Cupboard is closed and the key is lost" is sent to boss', function () {
+		    barmen = new Barmen(alwaysClosedAndLostCupboard, smsService);
 
 			barmen.pour("whisky", 100, visitorWithBirthday, cashMachineMock);
 
-			assert.equal(cashMachineMock.checkPrinted, true);
+			assert.equal(smsService.lastSentSms, 'Cupboard is closed and the key is lost');
 		});
 	});
 
