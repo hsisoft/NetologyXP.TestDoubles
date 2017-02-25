@@ -11,10 +11,13 @@ var FakeVisitor = require('../tests/fakes/FakeVisitor');
 suite('When barmen pours drinks', function () {
     let visitorWithBirthday = {};
     let barmen = {};
+	let smsService = {};
 
     setup(function () {
 		visitorWithBirthday = new FakeVisitor();
 		visitorWithBirthday.sober();
+
+		smsService = new SmsServiceMock();
     });
 
     suite('cupboard is full', function () {
