@@ -3,10 +3,16 @@
 class CupboardStub {
 	constructor() {
 		this._isEmpty = false;
+		this._isOpen = true;
+		this._isKeyLost = false;
 	}
 
 	isOpen() {
-		return true;
+		return this._isOpen;
+	};
+
+	isKeyLost() {
+		return this._isKeyLost;
 	};
 
 	hasDrink(drinkName, volume) {
@@ -19,6 +25,14 @@ class CupboardStub {
 
 	set empty(value) {
 		this._isEmpty = value;
+	}
+
+	set open(value) {
+		this._isOpen = value;
+	}
+
+	set KeyIsLost(value) {
+		this._isKeyLost = value;
 	}
 }
 

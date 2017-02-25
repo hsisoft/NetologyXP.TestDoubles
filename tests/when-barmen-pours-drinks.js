@@ -71,4 +71,21 @@ suite('When barmen pours drinks', function () {
         });
     });
 
+	suite('cupboard is closed and the key is lost', function () {
+		let alwaysClosedAndLostCupboard = {};
+
+		setup(function () {
+			alwaysClosedAndLostCupboard = new CupboardStub();
+			alwaysFullCupboard.empty = false;
+		});
+
+		test('SMS "cupboard is closed and the key is lost" is sent to boss', function () {
+		    barmen = new Barmen(alwaysFullCupboard, smsService);
+
+			barmen.pour("whisky", 100, visitorWithBirthday, cashMachineMock);
+
+			assert.equal(cashMachineMock.checkPrinted, true);
+		});
+	});
+
 });

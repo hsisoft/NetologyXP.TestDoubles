@@ -11,6 +11,16 @@ class Cupboard {
         return true;
     };
 
+	isKeyLost() {
+		// Database request
+		//
+		// return repository.hasAnyDrink();
+		// ...
+		//
+
+		return true;
+	};
+
     hasDrink(drinkName, volume) {
         // Database request
         //
