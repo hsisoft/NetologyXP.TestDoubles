@@ -8,17 +8,20 @@ var Cupboard = require('../src/cupboard');
 var CupboardStub = require('../tests/fakes/cupboard-stub');
 var FakeVisitor = require('../tests/fakes/FakeVisitor');
 var SmsServiceMock = require('../tests/fakes/sms-service-mock');
+var FakeCashMachine = require('../tests/fakes/FakeCashMachine');
 
 suite('When barmen pours drinks', function () {
 	let visitor = {};
     let visitorWithBirthday = {};
     let barmen = {};
 	let smsService = {};
+	let cashMachineMock = {};
 
     setup(function () {
 		visitor = new Visitor();
 		visitor.sober();
 
+		cashMachineMock = new FakeCashMachine();
 		smsService = new SmsServiceMock();
     });
 
@@ -44,11 +47,18 @@ suite('When barmen pours drinks', function () {
 
 		    barmen = new Barmen(alwaysFullCupboard, smsService);
 
-			var volumeInGlass = barmen.pour("whisky", 100, visitorWithBirthday);
+			var volumeInGlass = barmen.pour("whisky", 100, visitorWithBirthday, cashMachineMock);
 
 			assert.equal(100 * 3, volumeInGlass);
 		});
 
+		test('visitor gets a check', function () {
+			barmen = new Barmen(alwaysFullCupboard, smsService);
+
+			barmen.pour("whisky", 100, visitorWithBirthday, cashMachineMock);
+
+			assert.equal(cashMachineMock.checkPrinted, true);
+		});
     });
 
     suite('cupboard is empty', function () {

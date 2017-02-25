@@ -6,7 +6,9 @@ class Barmen {
 		this._smsService = smsService;
 	}
 
-    pour(drinkName, volume, visitor) {
+    pour(drinkName, volume, visitor, cashMachine) {
+		cashMachine.newOrder();
+
 		if (volume < 0) {
 			throw new Error('Invalid volume of ' + drinkName);
 		}
@@ -17,10 +19,12 @@ class Barmen {
         }
 
         if (visitor.hasBirthdayToday()){
+			cashMachine.printCheck();
 			return 3 *
                 this._cupboard.getDrink(drinkName, volume);
         }
 
+		cashMachine.printCheck();
         return this._cupboard.getDrink(drinkName, volume);
     }
 }
