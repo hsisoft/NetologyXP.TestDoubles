@@ -5,13 +5,15 @@ var Barmen = require('../src/barmen');
 var Visitor = require('../src/visitor');
 var Cupboard = require('../src/cupboard');
 
+var FakeVisitor = require('../tests/FakeVisitor');
+
 suite('When barmen pours drinks', function () {
-    let visitor = {};
+    let visitorWithBirthday = {};
     let barmen = {};
 
     setup(function () {
-        visitor = new Visitor();
-        visitor.sober();
+		visitorWithBirthday = new FakeVisitor();
+		visitorWithBirthday.sober();
     });
 
     suite('cupboard is full', function () {

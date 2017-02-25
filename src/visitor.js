@@ -19,6 +19,14 @@ class Visitor {
     getTotallyDrunk() {
         return this.totalDrinkVolume;
     }
+
+    getHasBirthdayToday(){
+        return this._bithday === Date.now() ? true : false;
+    }
+
+    set birthdayDate(date){
+        this._bithday = date;
+    }
 }
 
 module.exports = Visitor;
