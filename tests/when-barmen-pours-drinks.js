@@ -7,15 +7,17 @@ var Cupboard = require('../src/cupboard');
 
 var CupboardStub = require('../tests/fakes/cupboard-stub');
 var FakeVisitor = require('../tests/fakes/FakeVisitor');
+var SmsServiceMock = require('../tests/fakes/sms-service-mock');
 
 suite('When barmen pours drinks', function () {
+	let visitor = {};
     let visitorWithBirthday = {};
     let barmen = {};
 	let smsService = {};
 
     setup(function () {
-		visitorWithBirthday = new FakeVisitor();
-		visitorWithBirthday.sober();
+		visitor = new Visitor();
+		visitor.sober();
 
 		smsService = new SmsServiceMock();
     });
@@ -37,12 +39,14 @@ suite('When barmen pours drinks', function () {
         });
 
 		test('barmen pours x3 volume on a visitors birthday', function () {
-			barmen = new Barmen(alwaysFullCupboard, smsService);
+			visitorWithBirthday = new FakeVisitor(Date.now());
+			visitorWithBirthday.sober();
 
-			var volumeInGlass = barmen.pour("whisky", 100, visitor, new Calendar());
+		    barmen = new Barmen(alwaysFullCupboard, smsService);
 
-			assert.equal(100 * 2, volumeInGlass);
-			calendarStub.restore();
+			var volumeInGlass = barmen.pour("whisky", 100, visitorWithBirthday);
+
+			assert.equal(100 * 3, volumeInGlass);
 		});
 
     });

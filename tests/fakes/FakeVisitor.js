@@ -7,6 +7,10 @@ class FakeVisitor extends Visitor{
 		super();
 		super.birthdayDate = dateOfBirth;
 	}
+
+	hasBirthdayToday(){
+		return super.hasBirthdayToday();
+	}
 }
 
 module.exports = FakeVisitor;
