@@ -62,12 +62,20 @@ suite('When barmen pours drinks', function () {
     });
 
     suite('cupboard is empty', function () {
-        test('barmen rejects for a drink', function () {
+		let alwaysEmptyCupboard = {};
 
-        });
+		setup(function () {
+			alwaysEmptyCupboard = new CupboardStub();
+			alwaysEmptyCupboard.empty = true;
+		});
 
         test('sms to buy drink is sent to boss', function () {
+			barmen = new Barmen(alwaysEmptyCupboard, smsService);
+			let drinkName = "whisky";
 
+			barmen.pour(drinkName, 100, visitorWithBirthday, cashMachineMock);
+
+			assert.equal(smsService.lastSentSms, "Please, order a keg of " + drinkName);
         });
     });
 

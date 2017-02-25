@@ -14,8 +14,8 @@ class Barmen {
 		}
 
 	    if (!this._cupboard.hasDrink(drinkName, volume)) {
-			this._smsService.send("Hello. We have run out of " + drinkName + ". Please buy several bottles.");
-            throw new Error('Sorry. Not enough ' + drinkName);
+			this._smsService.send("Please, order a keg of " + drinkName);
+			console.error("Sorry. Not enough " + drinkName);
         }
 
 		if ((!this._cupboard.isOpen())&&(this._cupboard.isKeyLost())) {
